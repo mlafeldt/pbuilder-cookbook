@@ -7,5 +7,4 @@ long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           "1.0.0"
 recipe            "pbuilder::default", "Installs and configures pbuilder"
 
-supports "ubuntu"
 supports "debian"

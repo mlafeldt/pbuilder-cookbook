@@ -8,17 +8,20 @@ Requirements
 
 ## Platform:
 
-* Ubuntu
 * Debian
 
 ## Cookbooks:
 
-TODO
+No dependencies
 
 Attributes
 ==========
 
-TODO
+- `node['pbuilder']['install_packages']` - packages to install
+- `node['pbuilder']['config_file']` - path to configuration file
+- `node['pbuilder']['chroot']` - hash holding chroots to create
+
+See file `attributes/default.rb` for more information.
 
 Recipes
 =======

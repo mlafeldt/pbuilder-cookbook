@@ -18,3 +18,20 @@
 #
 
 node['pbuilder']['install_packages'].each { |pkg| package pkg }
+
+# TODO turn this into a LWRP
+node['pbuilder']['chroot'].each do |distro, options|
+  execute "pbuilder create --basetgz #{options['basetgz']} --distribution #{distro} " \
+          "--mirror #{options['mirror']} --debootstrapopts #{options['debootstrap_opts']}" do
+    creates options['basetgz']
+    action :run
+  end
+end
+
+template node['pbuilder']['config_file'] do
+  source "pbuilderrc.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  action :create
+end

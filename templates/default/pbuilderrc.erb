@@ -1,0 +1,16 @@
+# Configuration file for pbuilder.
+# Read pbuilderrc(5) for notes on specific options.
+
+: ${DIST:="<%= node['lsb']['codename'] %>"}
+
+NAME="$DIST"
+BASETGZ="/var/cache/pbuilder/$NAME-base.tgz"
+DISTRIBUTION="$DIST"
+BUILDRESULT="/var/cache/pbuilder/$NAME/result/"
+APTCACHE="/var/cache/pbuilder/$NAME/aptcache/"
+BUILDPLACE="/var/cache/pbuilder/build/"
+
+# tmpfs speedup
+mount | grep -q "^tmpfs on ${BUILDPLACE%/}" && APTCACHEHARDLINK=no
+
+:
