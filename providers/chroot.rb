@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: pbuilder
-# Recipe:: default
+# Provider:: chroot
 #
 # Copyright (C) 2012-2013 Mathias Lafeldt <mathias.lafeldt@gmail.com>
 #
@@ -17,24 +17,25 @@
 # limitations under the License.
 #
 
-node['pbuilder']['install_packages'].each { |pkg| package pkg }
-
-template node['pbuilder']['config_file'] do
-  source 'pbuilderrc.erb'
-  owner  'root'
-  group  'root'
-  mode   '0644'
-  action :create
+def whyrun_supported?
+  false
 end
 
-unless node['pbuilder']['chroots'].nil?
-  node['pbuilder']['chroots'].each do |name, options|
-    pbuilder_chroot name do
-      distribution  options['distribution']
-      architecture  options['architecture']
-      mirror        options['mirror']
-      debootstrap   options['debootstrap']
-      action        :create
-    end
+action :create do
+  distro = new_resource.distribution
+  arch = new_resource.architecture || `dpkg --print-architecture`.chomp
+  mirror = new_resource.mirror
+  debootstrap = new_resource.debootstrap
+  basetgz = ::File.join(node['pbuilder']['cache_dir'], "#{distro}-#{arch}-base.tgz")
+
+  cmd = "pbuilder create --basetgz #{basetgz} --distribution #{distro} --architecture #{arch}"
+  cmd = "#{cmd} --mirror #{mirror}" if mirror
+  cmd = "#{cmd} --debootstrapopts #{debootstrap.join(' ')}" if debootstrap
+
+  execute cmd do
+    creates basetgz
+    action :run
   end
+
+  new_resource.updated_by_last_action(true)
 end
