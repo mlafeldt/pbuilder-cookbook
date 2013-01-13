@@ -18,8 +18,8 @@
 #
 
 default['pbuilder']['install_packages'] = %w(pbuilder debootstrap devscripts)
-
 default['pbuilder']['config_file'] = '/etc/pbuilderrc'
+default['pbuilder']['cache_dir'] = '/var/cache/pbuilder'
 
 # Debian Lenny
 #default['pbuilder']['chroot']['lenny']['basetgz'] = '/var/cache/pbuilder/lenny-base.tgz'
