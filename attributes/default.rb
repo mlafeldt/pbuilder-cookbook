@@ -22,16 +22,19 @@ default['pbuilder']['config_file'] = '/etc/pbuilderrc'
 default['pbuilder']['cache_dir'] = '/var/cache/pbuilder'
 
 # Debian Lenny
-#default['pbuilder']['chroot']['lenny']['basetgz'] = '/var/cache/pbuilder/lenny-base.tgz'
-#default['pbuilder']['chroot']['lenny']['mirror'] = 'http://ftp.de.debian.org/debian-archive/debian/'
-#default['pbuilder']['chroot']['lenny']['debootstrap_opts'] = ['--variant=buildd']
+#default['pbuilder']['chroots']['lenny']['distribution'] = 'lenny'
+#default['pbuilder']['chroots']['lenny']['architecture'] = 'i386'
+#default['pbuilder']['chroots']['lenny']['mirror'] = 'http://ftp.de.debian.org/debian-archive/debian/'
+#default['pbuilder']['chroots']['lenny']['debootstrap'] = ['--variant=buildd']
 
 # Debian Squeeze
-default['pbuilder']['chroot']['squeeze']['basetgz'] = '/var/cache/pbuilder/squeeze-base.tgz'
-default['pbuilder']['chroot']['squeeze']['mirror'] = 'ftp://ftp2.de.debian.org/debian/'
-default['pbuilder']['chroot']['squeeze']['debootstrap_opts'] = ['--variant=buildd']
+default['pbuilder']['chroots']['squeeze']['distribution'] = 'squeeze'
+default['pbuilder']['chroots']['squeeze']['architecture'] = 'amd64'
+default['pbuilder']['chroots']['squeeze']['mirror'] = 'ftp://ftp2.de.debian.org/debian/'
+default['pbuilder']['chroots']['squeeze']['debootstrap'] = ['--variant=buildd']
 
 # Debian Wheezy
-#default['pbuilder']['chroot']['wheezy']['basetgz'] = '/var/cache/pbuilder/wheezy-base.tgz'
-#default['pbuilder']['chroot']['wheezy']['mirror'] = 'ftp://ftp2.de.debian.org/debian/'
-#default['pbuilder']['chroot']['wheezy']['debootstrap_opts'] = ['--variant=buildd']
+#default['pbuilder']['chroots']['wheezy']['distribution'] = 'wheezy'
+#default['pbuilder']['chroots']['wheezy']['architecture'] = 'amd64'
+#default['pbuilder']['chroots']['wheezy']['mirror'] = 'ftp://ftp2.de.debian.org/debian/'
+#default['pbuilder']['chroots']['wheezy']['debootstrap'] = ['--variant=buildd']

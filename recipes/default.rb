@@ -17,18 +17,26 @@
 # limitations under the License.
 #
 
-node['pbuilder']['install_packages'].each { |pkg| package pkg }
-
 # TODO turn this into a LWRP
-unless node['pbuilder']['chroot'].nil?
-  node['pbuilder']['chroot'].each do |distro, options|
-    execute "pbuilder create --basetgz #{options['basetgz']} --distribution #{distro} " \
-            "--mirror #{options['mirror']} --debootstrapopts #{options['debootstrap_opts']}" do
-      creates options['basetgz']
-      action :run
-    end
+def pbuilder_create(name, options)
+  distro = options['distribution'] || name
+  arch = options['architecture'] || `dpkg --print-architecture`.chomp
+  basetgz = ::File.join(node['pbuilder']['cache_dir'], "#{distro}-#{arch}-base.tgz")
+  mirror = options['mirror']
+  debootstrap = Array(options['debootstrap']).join(' ')
+
+  execute "pbuilder create " \
+          "--basetgz #{basetgz} " \
+          "--distribution #{distro} " \
+          "--architecture #{arch} " \
+          "--mirror #{mirror} " \
+          "--debootstrapopts #{debootstrap}" do
+    creates basetgz
+    action :run
   end
 end
+
+node['pbuilder']['install_packages'].each { |pkg| package pkg }
 
 template node['pbuilder']['config_file'] do
   source "pbuilderrc.erb"
@@ -36,4 +44,10 @@ template node['pbuilder']['config_file'] do
   group "root"
   mode "0644"
   action :create
+end
+
+unless node['pbuilder']['chroots'].nil?
+  node['pbuilder']['chroots'].each do |name, options|
+    pbuilder_create(name, options)
+  end
 end
