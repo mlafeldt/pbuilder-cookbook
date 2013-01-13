@@ -3,7 +3,7 @@ require 'chefspec'
 describe 'The recipe pbuilder::default' do
   let (:chef_run) { ChefSpec::ChefRunner.new.converge 'pbuilder::default' }
 
-  %w(pbuilder debootstrap devscripts cdbs).each do |pkg|
+  %w(pbuilder debootstrap devscripts).each do |pkg|
     it "should install the package #{pkg}" do
       chef_run.should install_package pkg
     end

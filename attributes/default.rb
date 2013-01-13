@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['pbuilder']['install_packages'] = %w(pbuilder debootstrap devscripts cdbs)
+default['pbuilder']['install_packages'] = %w(pbuilder debootstrap devscripts)
 
 default['pbuilder']['config_file'] = '/etc/pbuilderrc'
 
