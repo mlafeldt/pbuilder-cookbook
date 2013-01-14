@@ -29,8 +29,11 @@ action :create do
   basetgz = ::File.join(node['pbuilder']['cache_dir'], "#{distro}-#{arch}-base.tgz")
 
   cmd = "pbuilder create --basetgz #{basetgz} --distribution #{distro} --architecture #{arch}"
-  cmd = "#{cmd} --mirror #{mirror}" if mirror
-  cmd = "#{cmd} --debootstrapopts #{debootstrap.join(' ')}" if debootstrap
+  cmd = "#{cmd} --mirror #{mirror}" unless mirror.nil?
+  unless debootstrap.nil?
+    opts = debootstrap.map { |opt| "--debootstrapopts #{opt}" }.join(" ")
+    cmd = "#{cmd} #{opts}"
+  end
 
   execute cmd do
     creates basetgz
