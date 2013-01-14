@@ -8,3 +8,4 @@ version           "1.0.0"
 recipe            "pbuilder::default", "Installs and configures pbuilder. Optionally sets up chroot environments."
 
 supports "debian"
+supports "ubuntu"
