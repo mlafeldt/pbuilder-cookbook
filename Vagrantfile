@@ -13,7 +13,20 @@ Vagrant::Config.run do |config|
       "recipe[apt::default]",
       "recipe[pbuilder::default]"
     ]
-    chef.json = {}
+
+    chef.json = {
+      "pbuilder" => {
+        "chroots" => {
+          "wheezy64" => {
+            "distribution"    => "wheezy",
+            "architecture"    => "amd64",
+            "mirror"          => "ftp://ftp2.de.debian.org/debian/",
+#           "debootstrapopts" => ["--variant=buildd"]
+          }
+        }
+      }
+    }
+
     chef.log_level = :debug
   end
 end

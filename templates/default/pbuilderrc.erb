@@ -2,13 +2,14 @@
 # Read pbuilderrc(5) for notes on specific options.
 
 : ${DIST:="<%= node['lsb']['codename'] %>"}
+: ${ARCH:="$(dpkg --print-architecture)"}
 
-NAME="$DIST"
-BASETGZ="/var/cache/pbuilder/$NAME-base.tgz"
+NAME="$DIST-$ARCH"
+BASETGZ="<%= node['pbuilder']['cache_dir'] %>/$NAME-base.tgz"
 DISTRIBUTION="$DIST"
-BUILDRESULT="/var/cache/pbuilder/$NAME/result/"
-APTCACHE="/var/cache/pbuilder/$NAME/aptcache/"
-BUILDPLACE="/var/cache/pbuilder/build/"
+BUILDRESULT="<%= node['pbuilder']['cache_dir'] %>/$NAME/result/"
+APTCACHE="<%= node['pbuilder']['cache_dir'] %>/$NAME/aptcache/"
+BUILDPLACE="<%= node['pbuilder']['cache_dir'] %>/build/"
 
 # tmpfs speedup
 mount | grep -q "^tmpfs on ${BUILDPLACE%/}" && APTCACHEHARDLINK=no

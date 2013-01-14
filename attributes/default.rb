@@ -17,21 +17,14 @@
 # limitations under the License.
 #
 
+# List of packages to install
 default['pbuilder']['install_packages'] = %w(pbuilder debootstrap devscripts)
 
+# Path to configuration file
 default['pbuilder']['config_file'] = '/etc/pbuilderrc'
 
-# Debian Lenny
-#default['pbuilder']['chroot']['lenny']['basetgz'] = '/var/cache/pbuilder/lenny-base.tgz'
-#default['pbuilder']['chroot']['lenny']['mirror'] = 'http://ftp.de.debian.org/debian-archive/debian/'
-#default['pbuilder']['chroot']['lenny']['debootstrap_opts'] = ['--variant=buildd']
+# Path to directory where chroots, cache files, and build results are stored
+default['pbuilder']['cache_dir'] = '/var/cache/pbuilder'
 
-# Debian Squeeze
-default['pbuilder']['chroot']['squeeze']['basetgz'] = '/var/cache/pbuilder/squeeze-base.tgz'
-default['pbuilder']['chroot']['squeeze']['mirror'] = 'ftp://ftp2.de.debian.org/debian/'
-default['pbuilder']['chroot']['squeeze']['debootstrap_opts'] = ['--variant=buildd']
-
-# Debian Wheezy
-#default['pbuilder']['chroot']['wheezy']['basetgz'] = '/var/cache/pbuilder/wheezy-base.tgz'
-#default['pbuilder']['chroot']['wheezy']['mirror'] = 'ftp://ftp2.de.debian.org/debian/'
-#default['pbuilder']['chroot']['wheezy']['debootstrap_opts'] = ['--variant=buildd']
+# Hash of chroots to create
+default['pbuilder']['chroots'] = Hash.new

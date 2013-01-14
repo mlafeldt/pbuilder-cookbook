@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: pbuilder
-# Recipe:: default
+# Resource:: chroot
 #
 # Copyright (C) 2012-2013 Mathias Lafeldt <mathias.lafeldt@gmail.com>
 #
@@ -17,24 +17,11 @@
 # limitations under the License.
 #
 
-node['pbuilder']['install_packages'].each { |pkg| package pkg }
+actions :create
 
-template node['pbuilder']['config_file'] do
-  source 'pbuilderrc.erb'
-  owner  'root'
-  group  'root'
-  mode   '0644'
-  action :create
-end
+default_action :create
 
-unless node['pbuilder']['chroots'].nil?
-  node['pbuilder']['chroots'].each do |name, options|
-    pbuilder_chroot name do
-      distribution    options['distribution']
-      architecture    options['architecture']
-      mirror          options['mirror']
-      debootstrapopts options['debootstrapopts']
-      action          :create
-    end
-  end
-end
+attribute :distribution,    :kind_of => String, :name_attribute => true
+attribute :architecture,    :kind_of => String, :equal_to => ['i386', 'amd64']
+attribute :mirror,          :kind_of => String
+attribute :debootstrapopts, :kind_of => Array
