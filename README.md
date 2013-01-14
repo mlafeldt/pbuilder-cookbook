@@ -74,18 +74,23 @@ This cookbook contains the `pbuilder_chroot` LWRP.
 ### Examples
 
 ```ruby
-pbuilder_chroot "squeeze" do
+pbuilder_chroot "lenny32" do
+  distribution "lenny"
+  architecture "i386"
+  mirror       "http://ftp.de.debian.org/debian-archive/debian/"
+end
+```
+
+```ruby
+pbuilder_chroot "squeeze64" do
+  distribution    "squeeze"
+  architecture    "amd64"
   debootstrapopts ["--variant=buildd"]
 end
 ```
 
 ```ruby
-pbuilder_chroot "lenny" do
-  distribution    "lenny"
-  architecture    "i386"
-  mirror          "http://ftp.de.debian.org/debian-archive/debian/"
-  debootstrapopts ["--variant=buildd"]
-end
+pbuilder_chroot "wheezy"
 ```
 
 Testing
