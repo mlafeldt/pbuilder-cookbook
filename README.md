@@ -21,7 +21,21 @@ Attributes
 - `node['pbuilder']['config_file']` - Path to configuration file
 - `node['pbuilder']['cache_dir']` - Path to directory where chroots, cache files,
   and build results are stored
-- `node['pbuilder']['chroots']` - Hash of chroots to create
+- `node['pbuilder']['chroots']` - Hash of chroots to create. Attributes will be
+  passed 1:1 to `pbuilder_chroot` LWRP, for example:
+
+```json
+"pbuilder" => {
+  "chroots" => {
+    "wheezy64" => {
+      "distribution"    => "wheezy",
+      "architecture"    => "amd64",
+      "mirror"          => "ftp://ftp2.de.debian.org/debian/",
+      "debootstrapopts" => ["--variant=buildd"]
+    }
+  }
+}
+```
 
 See `attributes/default.rb` for default values.
 
@@ -48,7 +62,8 @@ This cookbook contains the `pbuilder_chroot` LWRP.
 
 - `distribution` - Name of distribution to use, e.g. `squeeze` (name attribute)
 - `architecture` - Architecture of distribution: `i386` or `amd64` (optional)
-- `mirror` - URL of Debian mirror to be specified in `sources.list` inside the chroot (optional)
+- `mirror` - URL of Debian mirror to be specified in `sources.list` inside the
+  chroot (optional)
 - `debootstrapopts` - Extra options to be passed to `debootstrap` (optional)
 
 ### Examples
