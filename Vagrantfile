@@ -17,23 +17,11 @@ Vagrant::Config.run do |config|
     chef.json = {
       "pbuilder" => {
         "chroots" => {
-          "lenny32" => {
-            "distribution"    => "lenny",
-            "architecture"    => "i386",
-            "mirror"          => "http://ftp.de.debian.org/debian-archive/debian/",
-            "debootstrapopts" => ["--variant=buildd"]
-          },
-          "squeeze64" => {
-            "distribution"    => "squeeze",
-            "architecture"    => "amd64",
-            "mirror"          => "ftp://ftp2.de.debian.org/debian/",
-            "debootstrapopts" => ["--variant=buildd"]
-          },
           "wheezy64" => {
             "distribution"    => "wheezy",
             "architecture"    => "amd64",
             "mirror"          => "ftp://ftp2.de.debian.org/debian/",
-            "debootstrapopts" => ["--variant=buildd"]
+#           "debootstrapopts" => ["--variant=buildd"]
           }
         }
       }
