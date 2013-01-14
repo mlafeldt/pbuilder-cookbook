@@ -1,7 +1,7 @@
 Description
 ===========
 
-Installs and configures pbuilder
+Installs and configures pbuilder. Provides LWRP to set up chroot environments.
 
 Requirements
 ============
@@ -17,18 +17,56 @@ No dependencies
 Attributes
 ==========
 
-- `node['pbuilder']['install_packages']` - packages to install
-- `node['pbuilder']['config_file']` - path to configuration file
-- `node['pbuilder']['chroot']` - hash holding chroots to create
+- `node['pbuilder']['install_packages']` - List of packages to install
+- `node['pbuilder']['config_file']` - Path to configuration file
+- `node['pbuilder']['cache_dir']` - Path to directory where chroots, cache files,
+  and build results are stored
+- `node['pbuilder']['chroots']` - Hash of chroots to create
 
-See file `attributes/default.rb` for more information.
+See `attributes/default.rb` for default values.
 
 Recipes
 =======
 
 ## pbuilder::default
 
-Installs and configures pbuilder
+Installs and configures pbuilder. Optionally sets up chroot environments.
+
+Resources/Providers
+===================
+
+This cookbook contains the `pbuilder_chroot` LWRP.
+
+## pbuilder_chroot
+
+### Actions
+
+- `:create` - Create a new chroot environment for specified distribution inside
+  `node['pbuilder']['cache_dir']`. Will be skipped if chroot already exists.
+
+### Attributes
+
+- `distribution` - Name of distribution to use, e.g. `squeeze` (name attribute)
+- `architecture` - Architecture of distribution: `i386` or `amd64` (optional)
+- `mirror` - URL of Debian mirror to be specified in `sources.list` inside the chroot (optional)
+- `debootstrap` - Extra options to be passed to `debootstrap` (optional)
+
+### Examples
+
+```ruby
+pbuilder_chroot "squeeze" do
+  debootstrap  ["--variant=buildd"]
+end
+```
+
+```ruby
+pbuilder_chroot "lenny" do
+  distribution "lenny"
+  architecture "i386"
+  mirror       "http://ftp.de.debian.org/debian-archive/debian/"
+  debootstrap  ["--variant=buildd"]
+end
+```
 
 Testing
 =======
