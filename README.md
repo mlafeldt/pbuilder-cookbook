@@ -49,22 +49,22 @@ This cookbook contains the `pbuilder_chroot` LWRP.
 - `distribution` - Name of distribution to use, e.g. `squeeze` (name attribute)
 - `architecture` - Architecture of distribution: `i386` or `amd64` (optional)
 - `mirror` - URL of Debian mirror to be specified in `sources.list` inside the chroot (optional)
-- `debootstrap` - Extra options to be passed to `debootstrap` (optional)
+- `debootstrapopts` - Extra options to be passed to `debootstrap` (optional)
 
 ### Examples
 
 ```ruby
 pbuilder_chroot "squeeze" do
-  debootstrap  ["--variant=buildd"]
+  debootstrapopts ["--variant=buildd"]
 end
 ```
 
 ```ruby
 pbuilder_chroot "lenny" do
-  distribution "lenny"
-  architecture "i386"
-  mirror       "http://ftp.de.debian.org/debian-archive/debian/"
-  debootstrap  ["--variant=buildd"]
+  distribution    "lenny"
+  architecture    "i386"
+  mirror          "http://ftp.de.debian.org/debian-archive/debian/"
+  debootstrapopts ["--variant=buildd"]
 end
 ```
 

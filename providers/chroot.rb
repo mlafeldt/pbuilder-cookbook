@@ -25,13 +25,13 @@ action :create do
   distro = new_resource.distribution
   arch = new_resource.architecture || `dpkg --print-architecture`.chomp
   mirror = new_resource.mirror
-  debootstrap = new_resource.debootstrap
+  debootstrapopts = new_resource.debootstrapopts
   basetgz = ::File.join(node['pbuilder']['cache_dir'], "#{distro}-#{arch}-base.tgz")
 
   cmd = "pbuilder create --basetgz #{basetgz} --distribution #{distro} --architecture #{arch}"
   cmd = "#{cmd} --mirror #{mirror}" unless mirror.nil?
-  unless debootstrap.nil?
-    opts = debootstrap.map { |opt| "--debootstrapopts #{opt}" }.join(" ")
+  unless debootstrapopts.nil?
+    opts = debootstrapopts.map { |opt| "--debootstrapopts #{opt}" }.join(" ")
     cmd = "#{cmd} #{opts}"
   end
 

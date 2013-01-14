@@ -30,11 +30,11 @@ end
 unless node['pbuilder']['chroots'].nil?
   node['pbuilder']['chroots'].each do |name, options|
     pbuilder_chroot name do
-      distribution  options['distribution']
-      architecture  options['architecture']
-      mirror        options['mirror']
-      debootstrap   options['debootstrap']
-      action        :create
+      distribution    options['distribution']
+      architecture    options['architecture']
+      mirror          options['mirror']
+      debootstrapopts options['debootstrapopts']
+      action          :create
     end
   end
 end

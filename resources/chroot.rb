@@ -21,7 +21,7 @@ actions :create
 
 default_action :create
 
-attribute :distribution,  :kind_of => String, :name_attribute => true
-attribute :architecture,  :kind_of => String, :equal_to => ['i386', 'amd64']
-attribute :mirror,        :kind_of => String
-attribute :debootstrap,   :kind_of => Array
+attribute :distribution,    :kind_of => String, :name_attribute => true
+attribute :architecture,    :kind_of => String, :equal_to => ['i386', 'amd64']
+attribute :mirror,          :kind_of => String
+attribute :debootstrapopts, :kind_of => Array

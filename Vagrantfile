@@ -18,22 +18,22 @@ Vagrant::Config.run do |config|
       "pbuilder" => {
         "chroots" => {
           "lenny" => {
-            "distribution" => "lenny",
-            "architecture" => "i386",
-            "mirror"       => "http://ftp.de.debian.org/debian-archive/debian/",
-            "debootstrap"  => ["--variant=buildd"]
+            "distribution"    => "lenny",
+            "architecture"    => "i386",
+            "mirror"          => "http://ftp.de.debian.org/debian-archive/debian/",
+            "debootstrapopts" => ["--variant=buildd"]
           },
           "squeeze" => {
-            "distribution" => "squeeze",
-            "architecture" => "amd64",
-            "mirror"       => "ftp://ftp2.de.debian.org/debian/",
-            "debootstrap"  => ["--variant=buildd"]
+            "distribution"    => "squeeze",
+            "architecture"    => "amd64",
+            "mirror"          => "ftp://ftp2.de.debian.org/debian/",
+            "debootstrapopts" => ["--variant=buildd"]
           },
           "wheezy" => {
-            "distribution" => "wheezy",
-            "architecture" => "amd64",
-            "mirror"       => "ftp://ftp2.de.debian.org/debian/",
-            "debootstrap"  => ["--variant=buildd"]
+            "distribution"    => "wheezy",
+            "architecture"    => "amd64",
+            "mirror"          => "ftp://ftp2.de.debian.org/debian/",
+            "debootstrapopts" => ["--variant=buildd"]
           }
         }
       }
