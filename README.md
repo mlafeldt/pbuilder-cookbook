@@ -71,6 +71,14 @@ This cookbook contains the `pbuilder_chroot` LWRP.
   chroot (optional)
 - `debootstrapopts` - Extra options to be passed to `debootstrap` (optional)
 
+After installing the chroots, you can tell pbuilder which chroot to use via the
+environment variables `DIST` (distribution) and `ARCH` (architecture), e.g.
+
+```sh
+$ DIST=wheezy pdebuild
+$ DIST=squeeze ARCH=i386 pdebuild
+```
+
 ### Examples
 
 ```ruby
