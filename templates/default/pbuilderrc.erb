@@ -1,7 +1,7 @@
 # Configuration file for pbuilder.
 # Read pbuilderrc(5) for notes on specific options.
 
-: ${DIST:="<%= node['lsb']['codename'] %>"}
+: ${DIST:="$(lsb_release --codename --short)"}
 : ${ARCH:="$(dpkg --print-architecture)"}
 
 NAME="$DIST-$ARCH"
