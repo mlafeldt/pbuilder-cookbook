@@ -6,7 +6,8 @@ Vagrant::Config.run do |config|
   config.vm.box = "squeeze64"
   config.vm.host_name = "pbuilder-squeeze"
 
-  config.vm.customize ["modifyvm", :id, "--memory", 1024]
+  config.vm.customize ["modifyvm", :id, "--memory", 2048]
+  config.vm.customize ["modifyvm", :id, "--cpus", 2]
 
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [
