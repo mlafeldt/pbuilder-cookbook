@@ -6,6 +6,7 @@ Vagrant::Config.run do |config|
   config.vm.box = "squeeze64"
   config.vm.host_name = "pbuilder-squeeze"
 
+  # Give us enough RAM to build chroots
   config.vm.customize ["modifyvm", :id, "--memory", 1024]
 
   config.vm.provision :chef_solo do |chef|
@@ -17,12 +18,16 @@ Vagrant::Config.run do |config|
     chef.json = {
       "pbuilder" => {
         "chroots" => {
-          "wheezy64" => {
-            "distribution"    => "wheezy",
+          "squeeze64" => {
+            "distribution"    => "squeeze",
             "architecture"    => "amd64",
-            "mirror"          => "ftp://ftp2.de.debian.org/debian/",
-#           "debootstrapopts" => ["--variant=buildd"]
-          }
+            "debootstrapopts" => ["--variant=buildd"]
+          },
+#          "wheezy64" => {
+#            "distribution"    => "wheezy",
+#            "architecture"    => "amd64",
+#            "debootstrapopts" => ["--variant=buildd"]
+#          }
         }
       }
     }
