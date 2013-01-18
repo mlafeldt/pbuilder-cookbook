@@ -1,3 +1,14 @@
+1.0.2 (Jan 18 2013)
+-------------------
+
+* Shell out to `lsb_release` instead of using the Ohai attribute
+  `node['lsb']['codename']`. For some reason, the attribute is empty during the
+  first converge.
+* Vagrantfile: Stop using slow FTP mirror in favor of Debian's CDN
+  (http://cdn.debian.net/debian/ is blazingly fast).
+* Vagrantfile: Build Squeeze box by default (current stable).
+
+
 1.0.1 (Jan 14 2013)
 -------------------
 
