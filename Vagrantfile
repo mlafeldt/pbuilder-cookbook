@@ -3,8 +3,9 @@
 require 'berkshelf/vagrant'
 
 Vagrant::Config.run do |config|
-  config.vm.box = "squeeze64"
-  config.vm.host_name = "pbuilder-squeeze"
+  config.vm.box = "lucid64"
+  config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
+  config.vm.host_name = "pbuilder-ubuntu"
 
   # Give us enough RAM to build chroots
   config.vm.customize ["modifyvm", :id, "--memory", 1024]
@@ -18,14 +19,16 @@ Vagrant::Config.run do |config|
     chef.json = {
       "pbuilder" => {
         "chroots" => {
-          "squeeze64" => {
-            "distribution"    => "squeeze",
-            "architecture"    => "amd64",
+          "lucid32" => {
+            "distribution"    => "lucid",
+            "architecture"    => "i386",
+            "mirror"          => "http://de.archive.ubuntu.com/ubuntu",
             "debootstrapopts" => ["--variant=buildd"]
           },
-#          "wheezy64" => {
-#            "distribution"    => "wheezy",
+#          "hardy64" => {
+#            "distribution"    => "hardy",
 #            "architecture"    => "amd64",
+#            "mirror"          => "http://de.archive.ubuntu.com/ubuntu",
 #            "debootstrapopts" => ["--variant=buildd"]
 #          }
         }
