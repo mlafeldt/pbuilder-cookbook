@@ -63,7 +63,8 @@ This cookbook contains the `pbuilder_chroot` LWRP.
 ### Actions
 
 - `:create` - Create a new chroot environment for specified distribution inside
-  `node['pbuilder']['cache_dir']`. Will be skipped if chroot already exists.
+  `node['pbuilder']['cache_dir']`. Will be skipped if chroot already exists and
+  its size is non-zero.
 
 ### Attributes
 

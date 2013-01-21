@@ -36,8 +36,11 @@ action :create do
   end
 
   execute cmd do
-    creates basetgz
     action :run
+    not_if do
+      ::File.exists?(basetgz) &&
+      ::File.size(basetgz) > 0
+    end
   end
 
   new_resource.updated_by_last_action(true)
