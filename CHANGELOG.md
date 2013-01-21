@@ -1,3 +1,13 @@
+1.0.3 (Jan 21 2013)
+-------------------
+
+* Tweak `pbuilder_chroot` LWRP to re-create chroot if the chroot file exists but
+  has a size of 0.
+* Vagrantfile: Use public lucid64 box instead of squeeze64.
+* README: Add more information about building Debian packages under Ubuntu. Also
+  add some more `pbuilder_chroot` examples.
+
+
 1.0.2 (Jan 18 2013)
 -------------------
 
