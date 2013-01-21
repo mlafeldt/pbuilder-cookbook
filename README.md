@@ -11,9 +11,11 @@ Requirements
 * Debian
 * Ubuntu
 
-Note: To build Debian packages under Ubuntu, you additionally need to install the
-package `debian-archive-keyring` and add the debootstrap option
-`--keyring=/usr/share/keyrings/debian-archive-keyring.gpg`.
+To build Debian packages under Ubuntu, you additionally need to
+
+- install the package `debian-archive-keyring`
+- add the debootstrap option `--keyring=/usr/share/keyrings/debian-archive-keyring.gpg`
+- set the mirror URL to a Debian repo, e.g. http://cdn.debian.net/debian/
 
 ## Cookbooks:
 
