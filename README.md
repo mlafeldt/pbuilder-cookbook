@@ -78,8 +78,9 @@ After installing the chroots, you can tell pbuilder which chroot to use via the
 environment variables `DIST` (distribution) and `ARCH` (architecture), e.g.
 
 ```sh
-$ DIST=wheezy pdebuild
-$ DIST=squeeze ARCH=i386 pdebuild
+$ DIST=lenny ARCH=i386 pdebuild
+$ DIST=squeeze ARCH=amd64 pdebuild
+$ DIST=wheezy pdebuild  # will use host architecture if ARCH is unset
 ```
 
 ### Examples
@@ -102,6 +103,12 @@ end
 
 ```ruby
 pbuilder_chroot "wheezy"
+```
+
+```ruby
+pbuilder_chroot "lucid" do
+  mirror "http://eu.archive.ubuntu.com/ubuntu"
+end
 ```
 
 Testing
