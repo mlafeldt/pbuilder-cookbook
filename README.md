@@ -26,8 +26,10 @@ Attributes
 
 - `node['pbuilder']['install_packages']` - List of packages to install
 - `node['pbuilder']['config_file']` - Path to pbuilder configuration file
-- `node['pbuilder']['cache_dir']` - Path to directory where chroots, cache
-  files, and build results are stored
+- `node['pbuilder']['cache_dir']` - Path to directory where cache files and
+  build results are stored
+- `node['pbuilder']['chroot_dir']` - Path to directory where chroot environments
+  are stored
 - `node['pbuilder']['chroots']` - Hash of chroots to create; attributes will be
   passed 1:1 to `pbuilder_chroot` LWRP
 
@@ -66,10 +68,10 @@ This cookbook contains the `pbuilder_chroot` LWRP.
 #### Actions
 
 - `:create` - Create a new chroot environment for specified distribution inside
-  `node['pbuilder']['cache_dir']`. Will be skipped if chroot already exists and
+  `node['pbuilder']['chroot_dir']`. Will be skipped if chroot already exists and
   its size is non-zero. This is the default action.
 - `:delete` - Delete an existing chroot environment from
-  `node['pbuilder']['cache_dir']`.
+  `node['pbuilder']['chroot_dir']`.
 
 #### Attributes
 

@@ -27,6 +27,14 @@ template node['pbuilder']['config_file'] do
   action :create
 end
 
+directory node['pbuilder']['chroot_dir'] do
+  owner     'root'
+  group     'root'
+  mode      '0755'
+  recursive true
+  action    :create
+end
+
 unless node['pbuilder']['chroots'].nil?
   node['pbuilder']['chroots'].each do |name, options|
     pbuilder_chroot name do
