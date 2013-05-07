@@ -1,3 +1,13 @@
+1.0.5 (May 7 2013)
+------------------
+
+Take over changes from [skeleton cookbook](https://github.com/mlafeldt/skeleton-cookbook):
+
+* Use Vagrant base box `jimdo-debian-7.0.0`.
+* Update ChefSpec gem to version 1.0.0.
+* Move testing-related documentation to TESTING.md.
+* Add Rake task `test:travis`.
+
 1.0.4 (Apr 19 2013)
 -------------------
 
