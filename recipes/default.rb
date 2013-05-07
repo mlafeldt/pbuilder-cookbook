@@ -34,7 +34,7 @@ unless node['pbuilder']['chroots'].nil?
       architecture    options['architecture']
       mirror          options['mirror']
       debootstrapopts options['debootstrapopts']
-      action          :create
+      action          options['action']
     end
   end
 end
