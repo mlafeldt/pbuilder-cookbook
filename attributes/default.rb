@@ -20,7 +20,7 @@
 # List of packages to install
 default['pbuilder']['install_packages'] = %w(pbuilder debootstrap devscripts)
 
-# Path to configuration file
+# Path to pbuilder configuration file
 default['pbuilder']['config_file'] = '/etc/pbuilderrc'
 
 # Path to directory where chroots, cache files, and build results are stored

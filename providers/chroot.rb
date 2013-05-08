@@ -21,17 +21,24 @@ def whyrun_supported?
   false
 end
 
-action :create do
-  distro = new_resource.distribution
-  arch = new_resource.architecture || `dpkg --print-architecture`.chomp
-  mirror = new_resource.mirror
-  debootstrapopts = new_resource.debootstrapopts
-  basetgz = ::File.join(node['pbuilder']['cache_dir'], "#{distro}-#{arch}-base.tgz")
+def load_current_resource
+  @distro = new_resource.distribution
+  @arch = new_resource.architecture || `dpkg --print-architecture`.chomp
+  @mirror = new_resource.mirror
+  @debootstrapopts = new_resource.debootstrapopts
+end
 
-  cmd = "pbuilder create --basetgz #{basetgz} --distribution #{distro} --architecture #{arch}"
-  cmd = "#{cmd} --mirror #{mirror}" unless mirror.nil?
-  unless debootstrapopts.nil?
-    opts = debootstrapopts.map { |opt| "--debootstrapopts #{opt}" }.join(" ")
+def chroot_file
+  ::File.join(node['pbuilder']['cache_dir'], "#{@distro}-#{@arch}-base.tgz")
+end
+
+action :create do
+  basetgz = chroot_file
+
+  cmd = "pbuilder create --basetgz #{basetgz} --distribution #{@distro} --architecture #{@arch}"
+  cmd = "#{cmd} --mirror #{@mirror}" unless @mirror.nil?
+  unless @debootstrapopts.nil?
+    opts = @debootstrapopts.map { |opt| "--debootstrapopts #{opt}" }.join(" ")
     cmd = "#{cmd} #{opts}"
   end
 
@@ -41,6 +48,17 @@ action :create do
       ::File.exists?(basetgz) &&
       ::File.size(basetgz) > 0
     end
+  end
+
+  new_resource.updated_by_last_action(true)
+end
+
+action :delete do
+  basetgz = chroot_file
+
+  file basetgz do
+    action :delete
+    only_if { ::File.exists?(basetgz) }
   end
 
   new_resource.updated_by_last_action(true)
