@@ -1,3 +1,10 @@
+1.0.6 (May 8 2013)
+------------------
+
+* Allow `pbuilder_chroot` LWRP to delete chroot environments via `:delete`
+  action. Test this new action and refactor spec examples.
+* Tweak level of markdown headings.
+
 1.0.5 (May 7 2013)
 ------------------
 
