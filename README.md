@@ -25,11 +25,15 @@ Attributes
 ==========
 
 - `node['pbuilder']['install_packages']` - List of packages to install
-- `node['pbuilder']['config_file']` - Path to configuration file
-- `node['pbuilder']['cache_dir']` - Path to directory where chroots, cache files,
-  and build results are stored
-- `node['pbuilder']['chroots']` - Hash of chroots to create. Attributes will be
-  passed 1:1 to `pbuilder_chroot` LWRP, for example:
+- `node['pbuilder']['config_file']` - Path to pbuilder configuration file
+- `node['pbuilder']['cache_dir']` - Path to directory where chroots, cache
+  files, and build results are stored
+- `node['pbuilder']['chroots']` - Hash of chroots to create; attributes will be
+  passed 1:1 to `pbuilder_chroot` LWRP
+
+See `attributes/default.rb` for default values.
+
+Here is how `node['pbuilder']['chroots']` might look like in JSON:
 
 ```json
 "pbuilder" => {
@@ -44,14 +48,13 @@ Attributes
 }
 ```
 
-See `attributes/default.rb` for default values.
-
 Recipes
 =======
 
 ## pbuilder::default
 
-Installs and configures pbuilder. Optionally sets up chroot environments.
+Installs and configures pbuilder. Optionally sets up chroot environments as
+specified in `node['pbuilder']['chroots']`.
 
 Resources/Providers
 ===================
@@ -64,12 +67,15 @@ This cookbook contains the `pbuilder_chroot` LWRP.
 
 - `:create` - Create a new chroot environment for specified distribution inside
   `node['pbuilder']['cache_dir']`. Will be skipped if chroot already exists and
-  its size is non-zero.
+  its size is non-zero. This is the default action.
+- `:delete` - Delete an existing chroot environment from
+  `node['pbuilder']['cache_dir']`.
 
 ### Attributes
 
 - `distribution` - Name of distribution to use, e.g. `squeeze` (name attribute)
-- `architecture` - Architecture of distribution: `i386` or `amd64` (optional)
+- `architecture` - Architecture of distribution: `i386` or `amd64` (optional,
+  defaults to host architecture)
 - `mirror` - URL of Debian mirror to be specified in `sources.list` inside the
   chroot (optional)
 - `debootstrapopts` - Extra options to be passed to `debootstrap` (optional)
@@ -80,10 +86,12 @@ environment variables `DIST` (distribution) and `ARCH` (architecture), e.g.
 ```sh
 $ DIST=lenny ARCH=i386 pdebuild
 $ DIST=squeeze ARCH=amd64 pdebuild
-$ DIST=wheezy pdebuild  # will use host architecture if ARCH is unset
+$ DIST=wheezy pdebuild  # use host architecture as ARCH is unset
 ```
 
 ### Examples
+
+Creating chroots:
 
 ```ruby
 pbuilder_chroot "lenny32" do
@@ -108,6 +116,16 @@ pbuilder_chroot "wheezy"
 ```ruby
 pbuilder_chroot "lucid" do
   mirror "http://eu.archive.ubuntu.com/ubuntu"
+end
+```
+
+Deleting a chroot:
+
+```ruby
+pbuilder_chroot "lenny32" do
+  distribution "lenny"
+  architecture "i386"
+  action       :delete
 end
 ```
 
