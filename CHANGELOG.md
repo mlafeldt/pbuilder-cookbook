@@ -1,3 +1,8 @@
+1.0.7 (May 13 2013)
+-------------------
+
+* Store chroots in separate directory set by `node['pbuilder']['chroot_dir']`.
+
 1.0.6 (May 8 2013)
 ------------------
 
