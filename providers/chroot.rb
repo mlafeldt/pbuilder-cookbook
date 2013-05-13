@@ -29,7 +29,7 @@ def load_current_resource
 end
 
 def chroot_file
-  ::File.join(node['pbuilder']['cache_dir'], "#{@distro}-#{@arch}-base.tgz")
+  ::File.join(node['pbuilder']['chroot_dir'], "#{@distro}-#{@arch}-base.tgz")
 end
 
 action :create do

@@ -38,8 +38,12 @@ describe 'The recipe pbuilder::default' do
     expect(chef_run).to create_file chef_run.node['pbuilder']['config_file']
   end
 
+  it 'creates the directory to hold chroot environments' do
+    expect(chef_run).to create_directory chef_run.node['pbuilder']['chroot_dir']
+  end
+
   def chroot_file(distro, arch)
-    ::File.join(chef_run.node['pbuilder']['cache_dir'], "#{distro}-#{arch}-base.tgz")
+    ::File.join(chef_run.node['pbuilder']['chroot_dir'], "#{distro}-#{arch}-base.tgz")
   end
 
   it 'creates the squeeze32 chroot' do

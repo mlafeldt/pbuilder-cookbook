@@ -5,7 +5,7 @@
 : ${ARCH:="$(dpkg --print-architecture)"}
 
 NAME="$DIST-$ARCH"
-BASETGZ="<%= node['pbuilder']['cache_dir'] %>/$NAME-base.tgz"
+BASETGZ="<%= node['pbuilder']['chroot_dir'] %>/$NAME-base.tgz"
 DISTRIBUTION="$DIST"
 BUILDRESULT="<%= node['pbuilder']['cache_dir'] %>/$NAME/result/"
 APTCACHE="<%= node['pbuilder']['cache_dir'] %>/$NAME/aptcache/"

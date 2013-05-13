@@ -23,8 +23,11 @@ default['pbuilder']['install_packages'] = %w(pbuilder debootstrap devscripts)
 # Path to pbuilder configuration file
 default['pbuilder']['config_file'] = '/etc/pbuilderrc'
 
-# Path to directory where chroots, cache files, and build results are stored
+# Path to directory where cache files and build results are stored
 default['pbuilder']['cache_dir'] = '/var/cache/pbuilder'
+
+# Path to directory where chroot environments are stored
+default['pbuilder']['chroot_dir'] = '/var/cache/pbuilder/chroot'
 
 # Hash of chroots to create
 default['pbuilder']['chroots'] = Hash.new
