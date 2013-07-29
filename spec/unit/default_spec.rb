@@ -1,7 +1,8 @@
-require 'chefspec'
+require 'chef_bones/unit_spec_helper'
 
 describe 'The recipe pbuilder::default' do
   let (:chef_run) { ChefSpec::ChefRunner.new.converge 'pbuilder::default' }
+
   let (:chef_run_with_chroots) do
     chef_run = ChefSpec::ChefRunner.new(:step_into => ['pbuilder_chroot']) do |node|
       node.set['pbuilder'] = {
