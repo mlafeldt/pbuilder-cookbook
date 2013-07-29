@@ -1,29 +1,46 @@
-require 'chefspec'
+require 'chef_bones/unit_spec_helper'
 
 describe 'The recipe pbuilder::default' do
-  let (:chef_run) { ChefSpec::ChefRunner.new.converge 'pbuilder::default' }
+  let (:chef_run) do
+    chef_run = ChefSpec::ChefRunner.new(
+      :platform      => 'debian',
+      :version       => '7.0',
+      :log_level     => :error,
+      :cookbook_path => COOKBOOK_PATH
+    )
+    Chef::Config.force_logger true
+    chef_run.converge 'pbuilder::default'
+    chef_run
+  end
+
   let (:chef_run_with_chroots) do
-    chef_run = ChefSpec::ChefRunner.new(:step_into => ['pbuilder_chroot']) do |node|
-      node.set['pbuilder'] = {
-        "chroots" => {
-          "squeeze32" => {
-            "distribution"    => "squeeze",
-            "architecture"    => "i386"
-          },
-          "wheezy64" => {
-            "distribution"    => "wheezy",
-            "architecture"    => "amd64",
-            "mirror"          => "ftp://ftp2.de.debian.org/debian/",
-            "debootstrapopts" => ["--variant=buildd"]
-          },
-          "lenny32" => {
-            "distribution"    => "lenny",
-            "architecture"    => "i386",
-            "action"          => "delete"
-          }
+    chef_run = ChefSpec::ChefRunner.new(
+      :platform      => 'debian',
+      :version       => '7.0',
+      :log_level     => :error,
+      :cookbook_path => COOKBOOK_PATH,
+      :step_into     => ['pbuilder_chroot']
+    )
+    chef_run.node.set['pbuilder'] = {
+      "chroots" => {
+        "squeeze32" => {
+          "distribution"    => "squeeze",
+          "architecture"    => "i386"
+        },
+        "wheezy64" => {
+          "distribution"    => "wheezy",
+          "architecture"    => "amd64",
+          "mirror"          => "ftp://ftp2.de.debian.org/debian/",
+          "debootstrapopts" => ["--variant=buildd"]
+        },
+        "lenny32" => {
+          "distribution"    => "lenny",
+          "architecture"    => "i386",
+          "action"          => "delete"
         }
       }
-    end
+    }
+    Chef::Config.force_logger true
     chef_run.converge 'pbuilder::default'
     chef_run
   end

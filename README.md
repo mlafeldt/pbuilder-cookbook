@@ -134,8 +134,8 @@ end
 Testing
 -------
 
-Everything you need to know about testing this cookbook is explained in
-`TESTING.md`.
+This cookbook utilizes [chef-bones] for testing. Everything you need to know
+about testing this cookbook is explained [here][chef-bones-testing].
 
 [![Build Status](https://travis-ci.org/mlafeldt/pbuilder-cookbook.png?branch=master)](https://travis-ci.org/mlafeldt/pbuilder-cookbook)
 
@@ -157,3 +157,16 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Contributing
+------------
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+
+[chef-bones]: https://github.com/mlafeldt/chef-bones
+[chef-bones-testing]: https://github.com/mlafeldt/chef-bones/blob/master/TESTING.md
