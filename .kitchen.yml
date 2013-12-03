@@ -1,0 +1,28 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: wheezy
+    driver_config:
+      box: jimdo-debian-7.0.0
+      box_url: https://jimdo-vagrant-boxes.s3.amazonaws.com/jimdo-debian-7.0.0.box
+      customize:
+        memory: 1024
+
+suites:
+  - name: default
+    run_list:
+      - recipe[apt::default]
+      - recipe[pbuilder::default]
+    attributes:
+      pbuilder:
+        chroots:
+          wheezy64:
+            distribution: wheezy
+            architecture: amd64
+            debootstrapopts:
+              - --variant=buildd
