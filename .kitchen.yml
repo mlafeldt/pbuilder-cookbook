@@ -6,12 +6,11 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: wheezy
+  - name: debian-7.2.0
     driver_config:
-      box: jimdo-debian-7.0.0
-      box_url: https://jimdo-vagrant-boxes.s3.amazonaws.com/jimdo-debian-7.0.0.box
       customize:
         memory: 1024
+        cpus: 1
 
 suites:
   - name: default
