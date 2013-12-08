@@ -138,12 +138,12 @@ Testing
 
 The cookbook provides the following Rake tasks for testing:
 
-    rake integration                  # Alias for kitchen:all
-    rake kitchen:all                  # Run all test instances
-    rake kitchen:default-ubuntu-1204  # Run default-ubuntu-1204 test instance
-    rake lint                         # Lint Chef cookbooks
-    rake spec                         # Run ChefSpec examples
-    rake test                         # Run all tests
+    rake integration                 # Alias for kitchen:all
+    rake kitchen:all                 # Run all test instances
+    rake kitchen:default-debian-720  # Run default-debian-720 test instance
+    rake lint                        # Lint Chef cookbooks
+    rake spec                        # Run ChefSpec examples
+    rake test                        # Run all tests
 
 License and Author
 ------------------
