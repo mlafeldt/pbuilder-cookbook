@@ -1,3 +1,11 @@
+1.1.0 (Dec 8 2013)
+------------------
+
+* Use Ohai data instead of shelling out to `dpkg --print-architecture`.
+* Use Test Kitchen for integration testing.
+* Update to ChefSpec v3.
+* Update README.
+
 1.0.8 (Jul 29 2013)
 -------------------
 
@@ -39,7 +47,6 @@ Take over changes from [skeleton cookbook](https://github.com/mlafeldt/skeleton-
   `COOKBOOKS_PATH` with `FIXTURES_PATH` which defaults to _fixtures_.
 * Let Travis run tests against Ruby 2.0.0.
 
-
 1.0.3 (Jan 21 2013)
 -------------------
 
@@ -48,7 +55,6 @@ Take over changes from [skeleton cookbook](https://github.com/mlafeldt/skeleton-
 * Vagrantfile: Use public lucid64 box instead of squeeze64.
 * README: Add more information about building Debian packages under Ubuntu. Also
   add some more `pbuilder_chroot` examples.
-
 
 1.0.2 (Jan 18 2013)
 -------------------
@@ -59,7 +65,6 @@ Take over changes from [skeleton cookbook](https://github.com/mlafeldt/skeleton-
 * Vagrantfile: Stop using slow FTP mirror in favor of Debian's CDN
   (http://cdn.debian.net/debian/ is blazingly fast).
 * Vagrantfile: Build Squeeze box by default (current stable).
-
 
 1.0.1 (Jan 14 2013)
 -------------------
@@ -73,7 +78,6 @@ Take over changes from [skeleton cookbook](https://github.com/mlafeldt/skeleton-
 * Update gems.
 * Update copyright year.
 * Add this CHANGELOG file.
-
 
 1.0.0 (Dec 20 2012)
 -------------------
