@@ -23,7 +23,8 @@ end
 
 def load_current_resource
   @distro = new_resource.distribution
-  @arch = new_resource.architecture || `dpkg --print-architecture`.chomp
+  @arch = new_resource.architecture
+  @arch ||= node["kernel"]["machine"] == "x86_64" ? "amd64" : "i386"
   @mirror = new_resource.mirror
   @debootstrapopts = new_resource.debootstrapopts
 end
