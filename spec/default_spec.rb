@@ -6,7 +6,7 @@ end
 
 describe "pbuilder::default" do
   context "basic setup" do
-    let (:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
+    let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
 
     it "installs the required packages" do
       chef_run.node["pbuilder"]["install_packages"].each do |pkg|
@@ -24,7 +24,7 @@ describe "pbuilder::default" do
   end
 
   context "create chroots" do
-    let (:chef_run) do
+    let(:chef_run) do
       ChefSpec::Runner.new(:step_into => ["pbuilder_chroot"]) do |node|
         node.set["pbuilder"] = {
           "chroots" => {
@@ -59,7 +59,7 @@ describe "pbuilder::default" do
   end
 
   context "delete chroots" do
-    let (:chef_run) do
+    let(:chef_run) do
       ChefSpec::Runner.new(:step_into => ["pbuilder_chroot"]) do |node|
         node.set["pbuilder"] = {
           "chroots" => {
