@@ -30,4 +30,4 @@ default['pbuilder']['cache_dir'] = '/var/cache/pbuilder'
 default['pbuilder']['chroot_dir'] = '/var/cache/pbuilder/chroot'
 
 # Hash of chroots to create
-default['pbuilder']['chroots'] = Hash.new
+default['pbuilder']['chroots'] = {}
